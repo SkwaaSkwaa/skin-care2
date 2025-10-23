@@ -1,1 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Skin Lab | Seoul Organic Cosmetic</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #4a7c59;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Background Image */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .background-image {
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.9)),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600"><rect width="800" height="600" fill="%23f9f3f4"/><text x="50%" y="45%" text-anchor="middle" font-family="Arial" font-size="60" font-weight="bold" fill="%234a7c59">THE SKIN LAB</text><text x="50%" y="55%" text-anchor="middle" font-family="Arial" font-size="24" fill="%23e8a2af">Seoul Organic Cosmetic</text></svg>');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .background-text {
+            text-align: center;
+            color: #4a7c59;
+            padding: 2rem;
+            max-width: 600px;
+        }
+        
+        .background-text h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .background-text p {
+            font-size: 1.5rem;
+            color: #e8a2af;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(232, 162, 175, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #4a7c59;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 8px;
+            color: #e8a2af;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 1.8rem;
+        }
+        
+        .nav-menu a {
+            font-weight: 500;
+            transition: color 0.3s;
+            color: #4a7c59;
+        }
+        
+        .nav-menu a:hover {
+            color: #e8a2af;
+        }
+        
+        .cart-icon {
+            color: #4a7c59;
+            font-size: 1.2rem;
+            margin-left: 2rem;
+        }
+        
+        /* Mobile Navigation */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #4a7c59;
+            cursor: pointer;
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 99;
+        }
+        
+        .mobile-menu.active {
+            display: block;
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+            padding: 1rem 0;
+        }
+        
+        .mobile-menu li {
+            padding: 0.8rem 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .mobile-menu a {
+            display: block;
+            color: #4a7c59;
+            font-weight: 500;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 85vh;
+            color: #333;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(232, 162, 175, 0.2);
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.2rem;
+            color: #4a7c59;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.2rem;
+            color: #555;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #e8a2af;
+            color: white;
+            padding: 0.9rem 2.2rem;
+            border-radius: 30px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #4a7c59;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background: #4a7c59;
+        }
+        
+        .btn-secondary:hover {
+            background: #e8a2af;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: linear-gradient(to bottom, #fff 0%, rgba(249, 243, 244, 0.7) 100%);
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #4a7c59;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: #777;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 8px 20px rgba(232, 162, 175, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid #e8a2af;
+        }
+        
+        .feature-card:nth-child(2) {
+            border-top-color: #4a7c59;
+        }
+        
+        .feature-card:nth-child(3) {
+            border-top-color: #a8d5b2;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(232, 162, 175, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 2.8rem;
+            color: #e8a2af;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card:nth-child(2) .feature-icon {
+            color: #4a7c59;
+        }
+        
+        .feature-card:nth-child(3) .feature-icon {
+            color: #a8d5b2;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 5rem 0;
+            background: rgba(255, 255, 255, 0.9);
+            position: relative;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(232, 162, 175, 0.2);
+        }
+        
+        .product-img {
+            height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: #f9f3f4;
+        }
+        
+        .product-img-content {
+            text-align: center;
+            padding: 1rem;
+            width: 100%;
+        }
+        
+        .product-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #4a7c59;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-ingredients {
+            font-size: 1rem;
+            color: #e8a2af;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .product-type {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #4a7c59;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        
+        .product-size {
+            font-size: 0.9rem;
+            color: #777;
+            margin-top: 1rem;
+        }
+        
+        .product-content {
+            padding: 1.8rem;
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #4a7c59;
+        }
+        
+        .product-desc {
+            color: #666;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+        
+        .product-price {
+            color: #e8a2af;
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background: linear-gradient(to bottom, rgba(249, 243, 244, 0.7) 0%, #fff 100%);
+            position: relative;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .about-img {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-img img {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: #4a7c59;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        /* Ingredient Highlights */
+        .ingredients {
+            padding: 5rem 0;
+            background: rgba(255, 255, 255, 0.9);
+            position: relative;
+        }
+        
+        .ingredient-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .ingredient-card {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-radius: 15px;
+            background: #f9f3f4;
+            transition: transform 0.3s;
+        }
+        
+        .ingredient-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .ingredient-icon {
+            font-size: 2.5rem;
+            color: #4a7c59;
+            margin-bottom: 1rem;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, rgba(249, 243, 244, 0.7) 0%, rgba(232, 245, 233, 0.7) 100%);
+            position: relative;
+        }
+        
+        .testimonial-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(232, 162, 175, 0.15);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: """;
+            font-size: 5rem;
+            color: #e8a2af;
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            opacity: 0.3;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: #4a7c59;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #4a7c59 0%, #e8a2af 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 2rem auto 0;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 0.9rem 1.5rem;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-btn {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 0 1.8rem;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .newsletter-btn:hover {
+            background: #555;
+        }
+        
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 4rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: #e8a2af;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-section a {
+            color: #ddd;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: #e8a2af;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #4a7c59;
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: #e8a2af;
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #555;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .newsletter-input, .newsletter-btn {
+                border-radius: 30px;
+                width: 100%;
+            }
+            
+            .background-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .background-text p {
+                font-size: 1.2rem;
+            }
+            
+            .product-img {
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Image -->
+    <div class="background-container">
+        <div class="background-image">
+            <div class="background-text">
+                <h1>THE SKIN LAB</h1>
+                <p>Seoul Organic Cosmetic</p>
+            </div>
+        </div>
+    </div>
 
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo"><i class="fas fa-spa"></i> The Skin Lab</div>
+            <ul class="nav-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Ingredients</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <a href="#" class="cart-icon"><i class="fas fa-shopping-bag"></i></a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Ingredients</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Korean-Inspired Organic Skincare</h1>
+                <p>Experience the beauty secrets of Seoul with our premium organic formulations that nourish your skin and enhance your natural radiance.</p>
+                <a href="#" class="btn">Discover Our Collection</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose The Skin Lab</h2>
+                <p>We combine Korean beauty wisdom with organic ingredients for exceptional results</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌿</div>
+                    <h3>Korean Formulations</h3>
+                    <p>Inspired by Seoul's advanced skincare technology and traditional beauty secrets.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">♻️</div>
+                    <h3>Certified Organic</h3>
+                    <p>All our ingredients are 100% organic, ethically sourced and cruelty-free.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3>Visible Results</h3>
+                    <p>Our products deliver noticeable improvements in skin texture and radiance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Best Sellers</h2>
+                <p>Discover our most loved Korean-inspired skincare essentials</p>
+            </div>
+            <div class="products-grid">
+                <!-- Niacinamide Serum Product -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <div class="product-img-content">
+                            <div class="product-brand">Anua</div>
+                            <div class="product-name">NIACINAMIDE 10% + TXA 4%</div>
+                            <div class="product-type">SERUM</div>
+                            <div class="product-ingredients">Brightening & Pore Care</div>
+                            <div class="product-size">30mL / 1.01fl.oz.</div>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">Niacinamide 10% + TXA 4% Serum</h3>
+                        <p class="product-desc">Advanced brightening serum with 10% niacinamide and 4% tranexamic acid to reduce hyperpigmentation, minimize pores, and even skin tone.</p>
+                        <p class="product-price">BWP280.00</p>
+                        <a href="#" class="btn">Add to Cart</a>
+                    </div>
+                </div>
+                
+                <!-- Cleansing Foam Product -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <div class="product-img-content">
+                            <div class="product-brand">Anua</div>
+                            <div class="product-name">HEARTLEAF + BHA</div>
+                            <div class="product-type">PORE DEEP CLEANSING FOAM</div>
+                            <div class="product-ingredients">Gentle Exfoliating Cleanser</div>
+                            <div class="product-size">180mL / 5.07fl.oz.</div>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">Heartleaf + BHA Pore Cleansing Foam</h3>
+                        <p class="product-desc">pH-balanced foaming cleanser with heartleaf extract and BHA to deeply cleanse pores, remove impurities, and gently exfoliate without stripping natural oils.</p>
+                        <p class="product-price">BWP200.00</p>
+                        <a href="#" class="btn">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Our Seoul Story</h2>
+                    <p>The Skin Lab was born from a passion for Korean beauty rituals and organic ingredients. Our founder spent years in Seoul studying traditional skincare methods and combining them with modern organic formulations.</p>
+                    <p>Today, we carefully craft each product in small batches to ensure quality and potency. We believe that what you put on your skin matters, which is why we're committed to transparency about our ingredients and processes.</p>
+                    <a href="#" class="btn btn-secondary">Our Korean Journey</a>
+                </div>
+                <div class="about-img">
+                    <!-- This would be an actual image in a real implementation -->
+                    <div style="width:100%;height:300px;background:linear-gradient(135deg, #e8a2af 0%, #a8d5b2 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:1.5rem;">Seoul Inspiration</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ingredient Highlights -->
+    <section class="ingredients">
+        <div class="container">
+            <div class="section-title">
+                <h2>Korean Beauty Ingredients</h2>
+                <p>Harnessing nature's finest from Korean traditions</p>
+            </div>
+            <div class="ingredient-cards">
+                <div class="ingredient-card">
+                    <div class="ingredient-icon">🌱</div>
+                    <h3>Heartleaf</h3>
+                    <p>Soothing and calming properties</p>
+                </div>
+                <div class="ingredient-card">
+                    <div class="ingredient-icon">🌿</div>
+                    <h3>Niacinamide</h3>
+                    <p>Brightening and pore-refining</p>
+                </div>
+                <div class="ingredient-card">
+                    <div class="ingredient-icon">🌸</div>
+                    <h3>BHA</h3>
+                    <p>Gentle exfoliation and deep cleansing</p>
+                </div>
+                <div class="ingredient-card">
+                    <div class="ingredient-icon">🍯</div>
+                    <h3>Tranexamic Acid</h3>
+                    <p>Targeted hyperpigmentation treatment</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Customers Say</h2>
+                <p>Real results from our Korean-inspired formulations</p>
+            </div>
+            <div class="testimonial-cards">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">The Niacinamide Serum has completely transformed my skin! My pores look smaller and my complexion is so much brighter after just two weeks.</p>
+                    <p class="testimonial-author">- Anna M.</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">I've always loved Korean skincare, and The Skin Lab brings that quality with organic ingredients. My sensitive skin has never been happier!</p>
+                    <p class="testimonial-author">- Sarah K.</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">The combination of Korean technology and organic ingredients is genius. Finally a brand that delivers visible results without harsh chemicals!</p>
+                    <p class="testimonial-author">- Jessica T.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Join Our Beauty Community</h2>
+            <p>Subscribe to our newsletter for Korean skincare tips, exclusive offers, and new product updates.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" class="newsletter-input" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>The Skin Lab</h3>
+                    <p>Korean-inspired organic skincare. Formulated with care for your skin and the planet.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="#">Store Policy</a></li>
+                        <li><a href="#">Payment Methods</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>4559 The Skin Lab<br>Gaborone City, BC 12345<br>Email: the.skin.lab4@gmail.com<br>Phone: +26778786143 / +26774334053</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 The Skin Lab. Seoul Organic Cosmetic. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            
+            if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
